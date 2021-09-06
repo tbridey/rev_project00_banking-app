@@ -25,7 +25,7 @@ public class User implements Serializable{
 	private int accNum;
 	public String state;
 	public String type;
-	private double balance=0.00;
+	protected double balance=0.00;
 	
 	@Override
 	public String toString() {

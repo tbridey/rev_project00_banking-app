@@ -33,7 +33,7 @@ public class MainMenu {
 			case 'c': System.out.println("*************************");
 					  System.out.println("        Welcome!         ");
 					  System.out.println("*************************");
-					  System.out.println(list.customerList.entrySet());
+					  System.out.println(list.customerList);
 					  System.out.println("What would you like to do?");
 					  System.out.println("--------------------------");
 					  System.out.println("1. Withdraw");
