@@ -14,7 +14,7 @@ public class MainMenu {
 	 *  e=employee
 	 */
 	public void printTopMenu(char m) {
-		
+		Database list = new Database();
 		switch(m) {
 			case 'm': System.out.println("*************************");
 				System.out.println("     SUPER COOL BANK     ");
@@ -33,6 +33,7 @@ public class MainMenu {
 			case 'c': System.out.println("*************************");
 					  System.out.println("        Welcome!         ");
 					  System.out.println("*************************");
+					  System.out.println(list.customerList.entrySet());
 					  System.out.println("What would you like to do?");
 					  System.out.println("--------------------------");
 					  System.out.println("1. Withdraw");

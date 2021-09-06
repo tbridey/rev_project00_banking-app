@@ -1,16 +1,8 @@
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Employee extends User {
+public class Employee extends User implements Serializable{
 	
-	public void runLogin() {
-		Employee e=new Employee();
-		try {
-			e.login();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	}
 
 	public char printEmployeeMenu() {
 		char m='e';

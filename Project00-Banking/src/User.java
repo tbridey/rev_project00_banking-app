@@ -1,4 +1,4 @@
-import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Scanner;
 
-import com.sun.org.apache.xml.internal.serialize.Serializer;
 
 
 public class User implements Serializable{
@@ -26,8 +25,17 @@ public class User implements Serializable{
 	private int accNum;
 	public String state;
 	public String type;
+	private double balance=0.00;
 	
-		public String getUserName() {
+	@Override
+	public String toString() {
+		String str = "User: "+name+"\nAccount Number: "+accNum+"\nBalance: $";
+		return str;
+		
+	}
+	
+	
+	public String getUserName() {
 		return userName;
 	}
 	public void setUserName(String userName) {

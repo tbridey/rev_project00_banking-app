@@ -1,17 +1,24 @@
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.ObjectOutputStream;
+import java.util.HashMap;
+
 
 /*
  * Main initializes the program and introduces the menu.
  * main will loop until the program is quit by the user
  */
-public class Main {
+public class Main{
+	
+//	public static HashMap<String, Customer> customerList=new HashMap<String, Customer>();
 
 	public static boolean quit = false;
 	
 	public static void main(String[] args) throws IOException {
 		
 		//Scanner scan = new Scanner(System.in);
+		
+		//HashMap<String, Customer> customerList;
 		
 		Database data= new Database();
 		
@@ -25,7 +32,12 @@ public class Main {
 				menu='p';
 				CustomerCreator newCus=new CustomerCreator();
 				newCus.register(data);
-				//System.out.println("Current customer list: "+data.customerList.entrySet());
+				System.out.println("Current customer list: "+data.customerList.entrySet());
+			      
+				
+				//FileDriver newList=new FileDriver();
+				//newList.write(data);
+				
 			break;
 			case 2:
 				menu='c';

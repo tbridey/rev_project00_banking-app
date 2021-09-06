@@ -1,8 +1,16 @@
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
-public class CustomerCreator {
+public class CustomerCreator implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String userName;
 	private String password;
@@ -32,7 +40,6 @@ public class CustomerCreator {
 		Random newNum=new Random();
 		accNum=newNum.nextInt(1000000);
 		
-		
 		System.out.println("Account Number: "+accNum);
 		
 		System.out.println("Thank you for registering!");
@@ -41,8 +48,12 @@ public class CustomerCreator {
 		
 		data.customerList.put(userName, newCustomer);
 		
+		
+		
 		FileDriver newList=new FileDriver();
-		newList.write(data);
+		newList.write(data.customerList);
+		 
+		
 		
 	
 		//call save function from User()
