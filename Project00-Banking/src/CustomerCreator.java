@@ -19,9 +19,10 @@ public class CustomerCreator implements Serializable{
 	private String state="open";
 	private String type="Customer";
 	
-	Scanner scan=new Scanner(System.in);
 	
-	public void register(Database data) throws IOException {
+	//Scanner scan=new Scanner(System.in);
+	
+	public void register(Database data, Scanner scan) throws IOException {
 		System.out.println("\n*************************");
 		System.out.println("\nWhat is your first and last name?");
 		name=scan.nextLine();
@@ -48,10 +49,13 @@ public class CustomerCreator implements Serializable{
 		
 		data.customerList.put(userName, newCustomer);
 		
+//		FileDriver newList=new FileDriver();
+//		
+//		System.out.println(data.customerList.entrySet());
+//		
+//		newList.write(data.customerList);
 		
 		
-		FileDriver newList=new FileDriver();
-		newList.write(data.customerList);
 		 
 		
 		

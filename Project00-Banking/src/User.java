@@ -1,11 +1,6 @@
 
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.Scanner;
+
 
 
 
@@ -16,8 +11,6 @@ public class User implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	Scanner scan=new Scanner(System.in);
-
 	private String name;
 	private String userName;
 	private String password;
@@ -25,11 +18,11 @@ public class User implements Serializable{
 	private int accNum;
 	public String state;
 	public String type;
-	protected double balance=0.00;
+	private double balance=0.00;
 	
 	@Override
 	public String toString() {
-		String str = "User: "+name+"\nAccount Number: "+accNum+"\nBalance: $";
+		String str = "User: "+name+" | #"+accNum+"\nBalance: $"+balance;
 		return str;
 		
 	}
@@ -70,4 +63,16 @@ public class User implements Serializable{
 		this.name = name;
 	}
 
+
+	public double getBalance() {
+		return balance;
+	}
+
+
+	public void setPositiveBalance(double balance) {
+		this.balance += balance;
+	}
+	public void setNegativeBalance(double balance) {
+		this.balance -= balance;
+	}
 }

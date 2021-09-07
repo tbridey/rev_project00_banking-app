@@ -9,7 +9,7 @@ public class Customer extends User implements Serializable {
 	
 	public String type="customer";
 	
-	public Customer(String name, String use, String pass, String SSN, int acct, String state, String type, double balance) {
+	public Customer(String name, String use, String pass, String SSN, int acct, String state, String type) {
 		this.setName(name);
 		this.setUserName(use);
 		this.setPassword(pass);
@@ -17,14 +17,12 @@ public class Customer extends User implements Serializable {
 		this.setAccNum(acct);
 		this.type=type;
 		this.state=state;
-		this.balance=balance;
+//		this.setBalance(0.00);
 	}
 
-	public char printCustomerMenu() {
-		char m='c';
-		MainMenu menu=new MainMenu();
-		menu.printTopMenu('c');
-		return m;
-	}
+	/*
+	 * public char printCustomerMenu() { char m='c'; MainMenu menu=new MainMenu();
+	 * menu.printTopMenu('c'); return m; }
+	 */
 	
 }

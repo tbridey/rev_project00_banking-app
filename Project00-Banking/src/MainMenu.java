@@ -1,3 +1,4 @@
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 /*
@@ -5,7 +6,7 @@ import java.util.Scanner;
  */
 public class MainMenu {
 
-	Scanner scan = new Scanner(System.in);
+	//Scanner scan = new Scanner(System.in);
 	
 	/*
 	 *  print the menu specified by the return
@@ -13,8 +14,11 @@ public class MainMenu {
 	 *  c=customer
 	 *  e=employee
 	 */
-	public void printTopMenu(char m) {
-		Database list = new Database();
+	public void printTopMenu(char m, String username, Database data) {
+		String un=username;
+		
+		
+		
 		switch(m) {
 			case 'm': System.out.println("*************************");
 				System.out.println("     SUPER COOL BANK     ");
@@ -33,13 +37,15 @@ public class MainMenu {
 			case 'c': System.out.println("*************************");
 					  System.out.println("        Welcome!         ");
 					  System.out.println("*************************");
-					  System.out.println(list.customerList);
-					  System.out.println("What would you like to do?");
+					  System.out.println(data.customerList.get(un));
+					  System.out.println("\nWhat would you like to do?");
 					  System.out.println("--------------------------");
 					  System.out.println("1. Withdraw");
 					  System.out.println("2. Deposit");
 					  System.out.println("3. Transfer");
 					  System.out.println("4. Open a Joint Acct. ");
+					  System.out.println("5. Back to Main menu");
+					  
 			break;
 			case 'e': System.out.println("*************************");
 			  System.out.println("        Welcome!         ");
@@ -81,7 +87,7 @@ public class MainMenu {
 	}
 	
 	// scan for and check the input
-	public int checkInput() {
+	public int checkInput(Scanner scan) {
 		int input = scan.nextInt();
 		return input;
 	}

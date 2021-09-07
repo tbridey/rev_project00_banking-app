@@ -1,7 +1,9 @@
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.HashMap;
+import java.util.*;
+
+
 
 
 /*
@@ -16,23 +18,32 @@ public class Main{
 	
 	public static void main(String[] args) throws IOException {
 		
-		//Scanner scan = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
 		
 		//HashMap<String, Customer> customerList;
 		
 		Database data= new Database();
 		
+		FileDriver db=new FileDriver();
+		
+		db.readCustomer(data);
+		
+		Transaction trans=new Transaction();
+		
+		//System.out.println(data.customerList.entrySet());
+		String un = null;
+		String pw;
 		do {
 			char menu='m';
 			MainMenu start = new MainMenu();
-			start.printTopMenu(menu);
-			int input = start.checkInput();
+			start.printTopMenu(menu, un, data);
+			int input = start.checkInput(scan);
 			switch(input) {
 			case 1:
 				menu='p';
 				CustomerCreator newCus=new CustomerCreator();
-				newCus.register(data);
-				System.out.println("Current customer list: "+data.customerList.entrySet());
+				newCus.register(data, scan);
+				//System.out.println("Current customer list: "+data.customerList.entrySet());
 			      
 				
 				//FileDriver newList=new FileDriver();
@@ -43,33 +54,51 @@ public class Main{
 				menu='c';
 				//Customer c=new Customer();
 				userLogin ul=new userLogin();
-				String un = ul.loginUser();
-				String pw = ul.loginPass();
+				un = ul.loginUser();
+				pw = ul.loginPass();
 				// use this class to check for valid username 
 				//and password
 				Validator checker=new Validator();
 				boolean x=checker.usernamePasswordCheck(data, un, pw);
 				if(x == true) {
-					start.printTopMenu(menu);
+					
+					boolean cont=true;
+					while(cont==true) {
+						start.printTopMenu(menu, un, data);
+						
+						int inputC = start.checkInput(scan);
+						 
+						switch(inputC) {
+						case 1: trans.withdraw(scan, un, data); 
+							break;
+						case 2:trans.deposit(scan, un, data);
+							break;
+						case 3:break;
+						case 4:break;
+						case 5: cont=false;
+							break;
+						}
+					}
+					
 				}
 				else {
 					System.out.println("\nERROR: invalid credentials");
 				}
-				int inputC = start.checkInput();
+				
 			break;
 			case 3:
 				menu='e';
 				Employee e=new Employee();
 				//e.login();
-				start.printTopMenu(menu);
-				int inputE = start.checkInput();
+				//start.printTopMenu(menu, un);
+				int inputE = start.checkInput(scan);
 			break;
 			case 4:
 				menu='a';
 				Admin a=new Admin();
 				//a.login();
-				start.printTopMenu(menu);
-				int inputA = start.checkInput();
+				//start.printTopMenu(menu, un);
+				int inputA = start.checkInput(scan);
 			break;
 			case 5: System.out.println("Goodbye!");
 				quit = true;
@@ -81,6 +110,7 @@ public class Main{
 //			}
 		
 		}while(quit == false);
+		db.writeCustomer(data.customerList);
 
 	}
 
