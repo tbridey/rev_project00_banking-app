@@ -89,6 +89,7 @@ public class MainMenu {
 	// scan for and check the input
 	public int checkInput(Scanner scan) {
 		int input = scan.nextInt();
+		scan.nextLine();
 		return input;
 	}
 	

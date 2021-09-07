@@ -25,6 +25,7 @@ public class CustomerCreator implements Serializable{
 	public void register(Database data, Scanner scan) throws IOException {
 		System.out.println("\n*************************");
 		System.out.println("\nWhat is your first and last name?");
+		//name=scan.next();
 		name=scan.nextLine();
 		System.out.println("\nSet your User-name and password");
 		System.out.println("--------------------------------");
