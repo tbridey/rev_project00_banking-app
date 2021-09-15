@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 
 public class Customer extends User implements Serializable {
 	/**
@@ -9,16 +10,16 @@ public class Customer extends User implements Serializable {
 	
 	public String type="customer";
 	
-	public Customer(String name, String use, String pass, String SSN, int acct, String state, String type) {
+	public Customer(String use, String name, String pass, String SSN, String address, List<Account> accounts) {
 		this.setName(name);
-		this.setUserName(use);
+		this.setUsername(use);
 		this.setPassword(pass);
 		this.setSSN(SSN);
-		this.setAccNum(acct);
-		this.type=type;
-		this.state=state;
+		this.setAddress(address);
+		this.setAccounts(accounts);
 //		this.setBalance(0.00);
 	}
+
 
 	/*
 	 * public char printCustomerMenu() { char m='c'; MainMenu menu=new MainMenu();

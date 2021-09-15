@@ -11,6 +11,9 @@ import java.util.*;
  * main will loop until the program is quit by the user
  */
 public class Main{
+	static final String user= "admin";
+	static final String password= "12345678";
+	static final String db_url="jdbc:oracle:thin:@database-1.cncgozgp4gc8.us-east-2.rds.amazonaws.com:1521:ORCL";
 	
 //	public static HashMap<String, Customer> customerList=new HashMap<String, Customer>();
 
@@ -27,6 +30,7 @@ public class Main{
 		FileDriver db=new FileDriver();
 		
 		db.readCustomer(data);
+		CustomerCreator newCus=new CustomerCreator();
 		
 		Transaction trans=new Transaction();
 		
@@ -34,24 +38,14 @@ public class Main{
 		String un = null;
 		String pw;
 		do {
-			char menu='m';
 			MainMenu start = new MainMenu();
-			start.printTopMenu(menu, un, data);
+			start.printMain();
 			int input = start.checkInput(scan);
 			switch(input) {
 			case 1:
-				menu='p';
-				CustomerCreator newCus=new CustomerCreator();
 				newCus.register(data, scan);
-				//System.out.println("Current customer list: "+data.customerList.entrySet());
-			      
-				
-				//FileDriver newList=new FileDriver();
-				//newList.write(data);
-				
 			break;
 			case 2:
-				menu='c';
 				//Customer c=new Customer();
 				userLogin ul=new userLogin();
 				un = ul.loginUser();
@@ -59,23 +53,44 @@ public class Main{
 				// use this class to check for valid username 
 				//and password
 				Validator checker=new Validator();
-				boolean x=checker.usernamePasswordCheck(data, un, pw);
+				boolean x=checker.usernamePasswordCheck(un, pw);
 				if(x == true) {
 					
 					boolean cont=true;
+					
+					//create customer object
+					//System.out.println("un="+un);
+					CustomerOracleDAO dao = new CustomerOracleDAO();
+					Customer custObj=dao.setCustomerAccountObj(un);
+					
+					
 					while(cont==true) {
-						start.printTopMenu(menu, un, data);
-						
-						int inputC = start.checkInput(scan);
-						 
-						switch(inputC) {
-						case 1: trans.withdraw(scan, un, data); 
+						Account account=start.printRunCustomer(scan, custObj);
+						int option=start.option;
+						switch(option) {
+						case 1:
+							System.out.println("\n"+account.getType()+" #"+account.getAcctNum()+" actions");
+							System.out.println("--------------------------");
+							System.out.println("1. Withdraw");
+							System.out.println("2. Deposit");
+							System.out.println("3. Transfer");
+							
+							int inputC = scan.nextInt();
+							 
+							switch(inputC) {
+							case 1: trans.withdraw(scan, account); 
+								break;
+							case 2:trans.deposit(scan, account);
+								break;
+							case 3:trans.transfer(scan, custObj);
+								break;
+							
+							}
 							break;
-						case 2:trans.deposit(scan, un, data);
-							break;
-						case 3:break;
-						case 4:break;
-						case 5: cont=false;
+						case 2: newCus.addAccount(scan, custObj);
+						break;
+						case 3:
+							cont=false;
 							break;
 						}
 					}
@@ -87,14 +102,46 @@ public class Main{
 				
 			break;
 			case 3:
-				menu='e';
-				Employee e=new Employee();
 				//e.login();
-				//start.printTopMenu(menu, un);
-				int inputE = start.checkInput(scan);
+				userLogin empLog=new userLogin();
+				un = empLog.loginUser();
+				pw = empLog.loginPass();
+				// use this class to check for valid username 
+				//and password
+				Validator checker2=new Validator();
+				boolean y=checker2.employeeLoginCheck(un, pw);
+				if(y == true) {
+					
+					boolean cont=true;
+					
+					EmployeeOracleDAO dao2 = new EmployeeOracleDAO();
+					Employee empObj=dao2.setEmployeeObj(un);
+					System.out.println(empObj);
+					EmployeeActions action=new EmployeeActions();
+					
+					while(cont==true) {
+						start.printRunEmployee(scan, empObj);
+						int option=start.option;
+						switch(option) {
+						case 1:	
+							action.searchUser(scan, empObj);
+						break;
+						case 2:
+							action.viewApplicationsByState(scan, empObj);
+						break;
+						case 3:
+							cont=false;
+						break;
+						}
+					}
+					
+				}
+				else {
+					System.out.println("\nERROR: invalid credentials");
+				}
+				
 			break;
 			case 4:
-				menu='a';
 				Admin a=new Admin();
 				//a.login();
 				//start.printTopMenu(menu, un);

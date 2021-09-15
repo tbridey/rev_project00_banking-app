@@ -1,5 +1,7 @@
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -12,27 +14,19 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private String name;
-	private String userName;
+	private String username;
 	private String password;
 	private String SSN;
-	private int accNum;
-	public String state;
-	public String type;
-	private double balance=0.00;
+	private String address;
+	protected List<Account> accounts = new ArrayList<Account>();
 	
-	@Override
-	public String toString() {
-		String str = "User: "+name+" | #"+accNum+"\nBalance: $"+balance;
-		return str;
-		
+	
+	
+	public String getUsername() {
+		return username;
 	}
-	
-	
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String userName) {
+		this.username = userName;
 	}
 	public String getPassword() {
 		return password;
@@ -50,12 +44,7 @@ public class User implements Serializable{
 	public void setSSN(String sSN) {
 		SSN = sSN;
 	}
-	public int getAccNum() {
-		return accNum;
-	}
-	public void setAccNum(int accNum) {
-		this.accNum = accNum;
-	}
+	
 	public String getName() {
 		return name;
 	}
@@ -64,15 +53,38 @@ public class User implements Serializable{
 	}
 
 
-	public double getBalance() {
-		return balance;
+//	public double getBalance() {
+//		double balance =userAcc.getBalance();
+//		return balance;
+//	}
+//
+//
+//	public void setPositiveBalance(double balance) {
+//		double newBalance =userAcc.getBalance();
+//		newBalance+=balance;
+//		userAcc.setBalance(newBalance);
+//	}
+//	public void setNegativeBalance(double balance) {
+//		double newBalance =userAcc.getBalance();
+//		newBalance-=balance;
+//		userAcc.setBalance(newBalance);
+//	}
+
+
+	public String getAddress() {
+		return address;
 	}
 
 
-	public void setPositiveBalance(double balance) {
-		this.balance += balance;
+	public void setAddress(String address) {
+		this.address = address;
 	}
-	public void setNegativeBalance(double balance) {
-		this.balance -= balance;
+	public List<Account> getAccounts() {
+		return accounts;
+	}
+	public void setAccounts(List<Account> accounts2) {
+		for(int i=0;i<accounts2.size();i++) {
+			this.accounts.add(accounts2.get(i));
+		}
 	}
 }
